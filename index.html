@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body><center>
+<h1>HTML DOM Events</h1>
+<h2>The onended Event</h2>
+
+<p>Press play and wait for the audio to end.</p>
+
+<audio controls onended="myFunction()">
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<p id="dom1"></p>
+<h2>The ondurationchange Event</h2>
+<video controls ondurationchange="myFunction1()" width ="600px" height ="300px">
+  <source src="vid1.mp4" type="video/mp4" >
+</video>
+
+<p id="dom2">Event has fired: </p>
+
+<h2>The blur Event</h2>
+
+Enter your name: <input type="text" id="fname" onblur="myFunction2()">
+
+<p>Input text to upper case.</p>
+
+<h2>The onratechange Event</h2>
+
+<p>Assign an "onratechange" event to a video element.</p>
+<p>Slowmo the video:</p>
+
+<video id="myVideo" width="320" height="240" autoplay controls onratechange="myFunction3()" width ="600px" height ="500px">
+  <source src="vid2.mp4" type="video/mp4">
+</video><br>
+
+<button onclick="setPlaySpeed()" type="button">Set video to be play in slow motion</button>
+
+<p id="dom3"></p>
+
+<h2>The animationstart, animationiteration and animationend Events</h2>
+
+<div id="myDIV" onclick="myFunction4()">Click me to start the animation.</div>
+
+</center>
+<script>
+function myFunction() {
+  document.getElementById("dom1").innerHTML = "The video has ended";
+}
+function myFunction1() {
+  document.getElementById("dom2").innerHTML += "Duration has changed";
+}
+function myFunction2() {
+  let x = document.getElementById("fname");
+  x.value = x.value.toUpperCase();
+}
+const video = document.getElementById("myVideo");
+
+// Set the playback speed to 0.3 (slow motion)
+function setPlaySpeed() { 
+  video.playbackRate = 0.3;
+} 
+
+// Alert some text when the playing speed of the video is changed
+function myFunction3() { 
+  document.getElementById("dom3").innerHTML = "The playing speed of the video was changed.";
+}
+const div1 = document.getElementById("myDIV");
+
+function myFunction4() {
+  div1.style.animation = "mymove 4s 2";
+}
+
+div1.addEventListener("animationstart", myStartFunction);
+div1.addEventListener("animationiteration", myRepeatFunction);
+div1.addEventListener("animationend", myEndFunction);
+
+function myStartFunction() {
+  this.innerHTML = "The animation has started";
+  this.style.backgroundColor = "lightviolet";
+}
+function myRepeatFunction() {
+  this.innerHTML = "The animation was played again";
+  this.style.backgroundColor = "lightblue";
+}
+function myEndFunction() {
+  this.innerHTML = "The animation has completed";
+  this.style.backgroundColor = "lightgray";
+}
+</script>
+</body>
+</html>
